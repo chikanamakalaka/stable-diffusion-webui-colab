@@ -12,7 +12,7 @@ body:
     id: what-did
     attributes:
       label: What happened?
-      description: Tell us what happened in a very clear and simple way
+      description: Please tell us what happened in a very clear and simple way
     validations:
       required: true
   - type: textarea
@@ -20,66 +20,37 @@ body:
     attributes:
       label: Console logs
       description: Please provide **full** cmd/terminal logs from the moment there is an error (usually starts with 'Traceback'), after your bug happened. If it's very long, provide a link to pastebin or similar service.
-      render: Shell
-  - type: checkboxes
+      render: shell
+  - type: textarea
+    id: model
     attributes:
-      label: Is there an existing issue for this?
-      description: Please search to see if an issue already exists for the bug you encountered, and that it hasn't been fixed in a recent build/commit.
-      options:
-        - label: I have searched the existing issues and checked the recent builds/commits
-          required: true
-  - type: checkboxes
-    attributes:
-      label: Are you using the latest version of the colab notebook?
-      description: Please make sure you're using the latest version of the notebook. We updates regularly. Unless you have a reason not to.
-      options:
-        - label: Yes, i am using the latest version from the repo
-          required: true
-  - type: input
-    id: colabname
-    attributes:
-      label: Which colab notebook did you use?
-      description: Type the model name. For example, if your colab is '7th_layer_webui_colab.ipynb' then type '7th layer'
+      label: Which colab and model(s) were you using when the error occurred?
+      description: Please enter the colab and model(s) link.
+      placeholder: |
+        https://colab.research.google.com/github/camenduru/stable-diffusion-webui-colab/blob/main/lite/stable_diffusion_webui_colab.ipynb
+        https://civitai.com/models/6755/cetus-mix
+        https://civitai.com/models/8217/fashion-girl
+        https://civitai.com/models/12597/moxin
     validations:
       required: true
   - type: dropdown
-    id: branch
+    id: link
     attributes:
-      label: Which repo branch did the colab you use comes from ?
-      multiple: true
+      label: Which Public WebUI Colab URL were you using when the error occurred?
+      description: Public WebUI Colab URL
       options:
-        - lite
-        - stable
-        - nightly
-        - community
-        - drive
-        - training
-        - I don't know
+        - remote.moe
+        - gradio.live
+        - lhr.life
+        - trycloudflare.com
     validations:
       required: true
-  - type: dropdown
-    id: tunnel
+  - type: textarea
+    id: png-info
     attributes:
-      label: Which tunnel did you use ? 
-      description: look at the last line (launch.py) on your colab
-      multiple: true
-      options:
-        - --multiple
-        - --googleusercontent
-        - --cloudflared
-        - --localhostrun
-        - --remotemoe
-        - --share (Gradio Tunnel)
-  - type: dropdown
-    id: browsers
-    attributes:
-      label: What browsers do you use to access the WebUI ?
-      multiple: true
-      options:
-        - Mozilla Firefox
-        - Google Chrome
-        - Brave
-        - Apple Safari
-        - Microsoft Edge
+      label: If you used HiRes mode when the error occurred, please provide the Hires info
+      description: Upscaler, Hires steps, Denoising strength, Upscale by ...
+      placeholder: |
+        Hires upscale: 2.85, Hires upscaler: R-ESRGAN 4x+
     validations:
-      required: true
+      required: false
